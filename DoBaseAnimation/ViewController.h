@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController 
 
+@property (strong, nonatomic) IBOutlet UIView *greenView;
 
 @end
 
