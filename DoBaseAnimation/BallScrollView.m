@@ -219,7 +219,7 @@
 //    transformAnimation.removedOnCompletion=NO;
 //    transformAnimation.fillMode = kCAFillModeForwards;
     
-    CABasicAnimation *transformAnimation = [self rotation:1 degree:M_PI direction:1 repeatCount:1];
+    CABasicAnimation *transformAnimation = [self rotation:2 degree:M_PI direction:1 repeatCount:1];
     transformAnimation.repeatCount = HUGE_VALF;
     //CABasicAnimation *transformAnimation  = nil;
     
