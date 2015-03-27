@@ -22,6 +22,8 @@ typedef enum {
 @property (assign,nonatomic) int currStep;
 @property (nonatomic,strong) UIView *ballView;
 
+@property (strong, nonatomic)  NSMutableArray *scrollArray;
+
 @property (nonatomic,assign) ScrollWay way;
 -(void)scrollBall;
 -(void)appearBall;

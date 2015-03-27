@@ -29,10 +29,10 @@
     {
         _pointArray = [[NSMutableArray alloc] init];
         [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height]];
-        [_pointArray addObject:[PointObject createPointWithX:0.25*self.frame.size.width andY:self.frame.size.height*0.3]];
-        [_pointArray addObject:[PointObject createPointWithX:0.5*self.frame.size.width andY:self.frame.size.height*0.8]];
-        [_pointArray addObject:[PointObject createPointWithX:0.75*self.frame.size.width  andY:self.frame.size.height*0.6]];
-        [_pointArray addObject:[PointObject createPointWithX:self.frame.size.width andY:self.frame.size.height]];
+        [_pointArray addObject:[PointObject createPointWithX:0.25*self.frame.size.width andY:self.frame.size.height*0.3 -self.ballView.frame.size.height/2.0]];
+        [_pointArray addObject:[PointObject createPointWithX:0.5*self.frame.size.width andY:self.frame.size.height*0.8 -self.ballView.frame.size.height/2.0]];
+        [_pointArray addObject:[PointObject createPointWithX:0.75*self.frame.size.width  andY:self.frame.size.height*0.6 -self.ballView.frame.size.height/2.0]];
+        [_pointArray addObject:[PointObject createPointWithX:self.frame.size.width andY:self.frame.size.height ]];
         
         
 //        [_pointArray addObject:[PointObject createPointWithX:40 andY:40]];
@@ -45,25 +45,41 @@
 {
     if(!_ballView)
     {  //self.frame.size.height - 3
-        _ballView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 30, 30, 30)];
-       // _ballView.backgroundColor = [UIColor greenColor];
+        _ballView = [[UIView alloc] initWithFrame:CGRectMake(-15, self.frame.size.height - 15, 30, 30)];
+      //  _ballView.backgroundColor = [UIColor greenColor];
 
-        _ballView.autoresizesSubviews = YES;
+        //_ballView.autoresizesSubviews = YES;
         [self addSubview:_ballView];
         
-        UIImageView *ballImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        //ballImageView.backgroundColor = [UIColor redColor];
-        //ballImageView.autoresizesSubviews = YES;
-        ballImageView.image = [UIImage imageNamed:@"111"];
-        [_ballView addSubview:ballImageView];
+//        UIImageView *ballImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//        //ballImageView.backgroundColor = [UIColor redColor];
+//        //ballImageView.autoresizesSubviews = YES;
+//        ballImageView.image = [UIImage imageNamed:@"111"];
+//        [_ballView addSubview:ballImageView];
+//
+//        UIButton *sender = [[UIButton alloc] initWithFrame:CGRectMake(30, 30, 60, 25)];
+//        sender.backgroundColor = [UIColor redColor];
+//        [sender addTarget:self action:@selector(clickBall:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:sender];
         
-        UIButton *sender = [[UIButton alloc] initWithFrame:CGRectMake(30, 30, 60, 25)];
-        sender.backgroundColor = [UIColor redColor];
-        [sender addTarget:self action:@selector(clickBall:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:sender];
+        UIButton *ballBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [ballBtn addTarget:self action:@selector(clickBall:) forControlEvents:UIControlEventTouchUpInside];
+        [ballBtn setImage:[UIImage imageNamed:@"111"]forState:UIControlStateNormal];
+        [_ballView addSubview:ballBtn];
+        
+        UIButton *rollBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        rollBackBtn.backgroundColor = [UIColor redColor];
+        [rollBackBtn addTarget:self action:@selector(rollBack:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:rollBackBtn];
         
     }
     return _ballView;
+}
+
+-(void)rollBack:(UIButton *)sender
+{
+    [self backScroll];
+    self.currStep = 0;
 }
 
 -(void)clickBall:(UIButton *)sender
@@ -72,7 +88,7 @@
     {
         [self beginAppear];
     }
-    else if (self.currStep == 2)
+    else if (self.currStep == 1)
     {
         [self goonScroll];
     }
@@ -115,6 +131,8 @@
 
 -(void)scrollPoints:(NSArray *)ptArray
 {
+    self.scrollArray = ptArray;
+    
     CAKeyframeAnimation *animation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
     animation.duration= 2.0f;
     animation.removedOnCompletion = NO;
@@ -126,7 +144,7 @@
     
     PointObject *point = [ptArray objectAtIndex:0];
     
-    CGPathMoveToPoint(curvedPath, NULL,point.x -self.ballView.frame.size.width/2,  point.y - self.ballView.frame.size.height/2);
+    CGPathMoveToPoint(curvedPath, NULL,point.x ,  point.y );
     
     　　//增加4个二阶贝塞尔曲线
 //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 45 , self.frame.size.height - 120, 75, self.frame.size.height - 60);
@@ -141,7 +159,9 @@
     {
         PointObject *point1 = [ptArray objectAtIndex:i];
         PointObject *point2 = [ptArray objectAtIndex:i+1];
-        CGPathAddQuadCurveToPoint(curvedPath, NULL, point1.x -self.ballView.frame.size.width/2 , point1.y - self.ballView.frame.size.height/2,  point2.x - self.ballView.frame.size.width/2 , point2.y - self.ballView.frame.size.height/2);
+//        CGPathAddQuadCurveToPoint(curvedPath, NULL, point1.x -self.ballView.frame.size.width/2 , point1.y - self.ballView.frame.size.height/2,  point2.x - self.ballView.frame.size.width/2 , point2.y - self.ballView.frame.size.height/2);
+        
+        CGPathAddQuadCurveToPoint(curvedPath, NULL, point1.x , point1.y ,  point2.x, point2.y);
     }
     
 //
@@ -182,7 +202,7 @@
     CAAnimationGroup *animGroup = [CAAnimationGroup animation];
     animGroup.animations = [NSArray arrayWithObjects:animation,transformAnimation,nil];
     animGroup.duration = 2.0f;
-    animGroup.removedOnCompletion = NO;
+    animGroup.removedOnCompletion = YES;
     //animation.calculationMode = kCAAnimationCubicPaced;
     transformAnimation.repeatCount = HUGE_VALF;
     animGroup.delegate = self;
@@ -323,21 +343,52 @@
     //195, self.frame.size.height - 100
     
     
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    PointObject *lastPoint = [self.scrollArray lastObject];
     
-    // 动画选项设定
-    animation.duration = 1; // 动画持续时间
-    //animation.repeatCount = 1; // 重复次数
-    animation.removedOnCompletion=NO;
-    animation.fillMode = kCAFillModeForwards;
-   // animation.autoreverses = YES; // 动画结束时执行逆动画
+//    if(self.currStep == 1)
+//    {
+//        self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y);
+//    }
+//    else if(self.currStep == 1)
+//    {
+//        self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y -15);
+//    }
+//    else
+//    {
+//        self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y - 15 );
+//    }
     
-    // 缩放倍数
-//    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
-    animation.toValue = [NSNumber numberWithFloat:2.0]; // 结束时的倍率
+    //self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y);
     
-    // 添加动画
-    //[self.ballView.layer addAnimation:animation forKey:@"scale-layer"];
+    //self.ballView.frame = CGRectMake(lastPoint.x -15, lastPoint.y - 15, 30, 30);
+    
+    self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y);
+    
+    
+    if(self.currStep == 1)
+    {
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        
+        // 动画选项设定
+        animation.duration = 1; // 动画持续时间
+        //animation.repeatCount = 1; // 重复次数
+        animation.removedOnCompletion=NO;
+        animation.fillMode = kCAFillModeForwards;
+        // animation.autoreverses = YES; // 动画结束时执行逆动画
+        
+        // 缩放倍数
+        //    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+        animation.toValue = [NSNumber numberWithFloat:2.0]; // 结束时的倍率
+        
+        // 添加动画
+        [self.ballView.layer addAnimation:animation forKey:@"scale-layer"];
+
+    }
+    else
+    {
+        [self.ballView.layer removeAnimationForKey:@"scale-layer"];
+    
+    }
 
 }
 
@@ -358,6 +409,26 @@
     animation.repeatCount= repeatCount;
     animation.delegate= self;
     
+    return animation;
+}
+
+-(CABasicAnimation *)makeScaleAnimation
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    
+    // 动画选项设定
+    animation.duration = 1; // 动画持续时间
+    //animation.repeatCount = 1; // 重复次数
+    animation.removedOnCompletion=NO;
+    animation.fillMode = kCAFillModeForwards;
+    // animation.autoreverses = YES; // 动画结束时执行逆动画
+    
+    // 缩放倍数
+    //    animation.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation.toValue = [NSNumber numberWithFloat:2.0]; // 结束时的倍率
+    
+    // 添加动画
+    //[self.ballView.layer addAnimation:animation forKey:@"scale-layer"];
     return animation;
 }
 
