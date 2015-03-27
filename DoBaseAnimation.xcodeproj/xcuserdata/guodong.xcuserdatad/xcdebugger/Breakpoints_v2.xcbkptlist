@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DoBaseAnimation/BallScrollView.m"
-            timestampString = "449138413.970656"
+            timestampString = "449143828.619056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "-clickBall:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,13 +42,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DoBaseAnimation/BallScrollView.m"
-            timestampString = "449140131.195125"
+            timestampString = "449143828.619056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "-animationDidStop:finished:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

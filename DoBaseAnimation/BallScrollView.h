@@ -15,6 +15,17 @@ typedef enum {
     BackScroll,
 }ScrollWay;
 
+typedef enum {
+    LEFT,
+    CENTER,
+    RIGHT,
+}BallPosition;
+
+@protocol stopPositionDelegate <NSObject>
+@optional
+-(void)ballPosition:(BallPosition)postion;
+@end
+
 @interface BallScrollView : UIView
 @property (strong, nonatomic)  NSMutableArray *pointArray;
 @property (assign,nonatomic) int originStep;
@@ -25,6 +36,11 @@ typedef enum {
 @property (strong, nonatomic)  NSMutableArray *scrollArray;
 
 @property (nonatomic,assign) ScrollWay way;
+
+@property (nonatomic,assign) id<stopPositionDelegate> delegate;
+
+@property (nonatomic,assign) BallPosition position;
+
 -(void)scrollBall;
 -(void)appearBall;
 -(void)beginAppear;

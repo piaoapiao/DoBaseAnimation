@@ -35,6 +35,30 @@
         [_pointArray addObject:[PointObject createPointWithX:self.frame.size.width andY:self.frame.size.height ]];
         
         
+        
+        
+//        -(NSMutableArray *)pointArray
+//        {
+//            if(!_pointArray)
+//            {
+//                _pointArray = [[NSMutableArray alloc] init];
+//                [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height]];
+//                [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height*0.8]];
+//                [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height*0.3]];
+//                [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height*0.6]];
+//                [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height]];
+//                
+//                for(int i =0;i< _pointArray.count;i++)
+//                {
+//                    PointObject *point = [_pointArray objectAtIndex:i];
+//                    point.x = (self.frame.size.width/(_pointArray.count -1))*i;
+//                }
+//                
+//            }
+//            return _pointArray;
+//        }
+
+        
 //        [_pointArray addObject:[PointObject createPointWithX:40 andY:40]];
     }
     return _pointArray;
@@ -125,7 +149,7 @@
     }
     
     [self scrollPoints:temp2];
-     self.currStep = 0;
+
 }
 
 
@@ -327,40 +351,9 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     NSLog(@"animationDidStop finished :%d",flag);
-   // self.ballView.center = 140, self.frame.size.height - 30;
-    
-  //  self.ballView.center = CGPointMake(140, self.frame.size.height - 30);
-    
-   // self.ballView.frame  = CGRectMake(290, self.frame.size.height -30, 30, 30);
-    
-//    CGRect frame = self.ballView.frame;
-////    self.ballView.frame  = CGRectMake(frame.origin.x - 20   , frame.origin.y - 20, 30, 30);
-//    
-//    [UIView animateWithDuration:0.5 animations:^{
-//        self.ballView.frame  = CGRectMake(195    , self.frame.size.height - 80, 70, 70);
-//    }];
-
-    //195, self.frame.size.height - 100
-    
     
     PointObject *lastPoint = [self.scrollArray lastObject];
     
-//    if(self.currStep == 1)
-//    {
-//        self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y);
-//    }
-//    else if(self.currStep == 1)
-//    {
-//        self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y -15);
-//    }
-//    else
-//    {
-//        self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y - 15 );
-//    }
-    
-    //self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y);
-    
-    //self.ballView.frame = CGRectMake(lastPoint.x -15, lastPoint.y - 15, 30, 30);
     
     self.ballView.center = CGPointMake(lastPoint.x, lastPoint.y);
     
@@ -382,12 +375,30 @@
         
         // 添加动画
         [self.ballView.layer addAnimation:animation forKey:@"scale-layer"];
-
+        
+        
+        if(_delegate && [_delegate respondsToSelector:@selector(ballPosition:)])
+        {
+            [_delegate ballPosition:CENTER];
+        }
     }
     else
     {
         [self.ballView.layer removeAnimationForKey:@"scale-layer"];
-    
+        
+        if(self.currStep == 0)
+        {
+            NSLog(@"roll Back");
+            if(_delegate && [_delegate respondsToSelector:@selector(ballPosition:)])
+            {
+                [_delegate ballPosition:LEFT];
+            }
+        }
+        else if (self.currStep == 2)
+        {
+            NSLog(@"go netx step");
+            [_delegate ballPosition:RIGHT];
+        }
     }
 
 }
