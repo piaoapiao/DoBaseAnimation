@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "BallScrollView.h"
 
 @interface ViewController : UIViewController 
 
 @property (strong, nonatomic) IBOutlet UIView *greenView;
+
+
+@property (strong, nonatomic) IBOutlet BallScrollView *scrollView;
+
 
 @end
 

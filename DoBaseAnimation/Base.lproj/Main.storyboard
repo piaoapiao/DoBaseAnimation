@@ -18,16 +18,22 @@
                                 <color key="backgroundColor" red="0.62745098040000002" green="0.83137254900000002" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" id="hxB-d4-kGp" customClass="BallScrollView">
+                                <rect key="frame" x="0.0" y="224" width="320" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.62745098040000002" green="0.83137254900000002" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="greenView" destination="xSQ-OE-upp" id="hvE-Yb-beT"/>
+                        <outlet property="scrollView" destination="hxB-d4-kGp" id="pVJ-FI-qUA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81.066666666666663" y="278.31999999999999"/>
+            <point key="canvasLocation" x="81" y="278"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

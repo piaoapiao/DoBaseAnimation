@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		463016841AC4F01400124026 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 463016831AC4F01400124026 /* Reveal.framework */; };
+		463016861AC4F02900124026 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 463016851AC4F02900124026 /* QuartzCore.framework */; };
+		463016881AC4F03200124026 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 463016871AC4F03200124026 /* CFNetwork.framework */; };
+		46E579B21AC4161300A31251 /* 111.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E579B11AC4161300A31251 /* 111.png */; };
 		46EE68651AC2ADAA008FB8A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EE68641AC2ADAA008FB8A4 /* main.m */; };
 		46EE68681AC2ADAA008FB8A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EE68671AC2ADAA008FB8A4 /* AppDelegate.m */; };
 		46EE686B1AC2ADAA008FB8A4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EE686A1AC2ADAA008FB8A4 /* ViewController.m */; };
 		46EE686E1AC2ADAA008FB8A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46EE686C1AC2ADAA008FB8A4 /* Main.storyboard */; };
 		46EE68701AC2ADAA008FB8A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE686F1AC2ADAA008FB8A4 /* Images.xcassets */; };
 		46EE687F1AC2ADAA008FB8A4 /* DoBaseAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EE687E1AC2ADAA008FB8A4 /* DoBaseAnimationTests.m */; };
+		46EE688A1AC3B4C0008FB8A4 /* PointObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EE68891AC3B4C0008FB8A4 /* PointObject.m */; };
+		46EE688D1AC3D05F008FB8A4 /* BallScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EE688C1AC3D05F008FB8A4 /* BallScrollView.m */; };
+		46EE688F1AC3E69F008FB8A4 /* 11123.png in Resources */ = {isa = PBXBuildFile; fileRef = 46EE688E1AC3E69F008FB8A4 /* 11123.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		463016831AC4F01400124026 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		463016851AC4F02900124026 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		463016871AC4F03200124026 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		46E579B11AC4161300A31251 /* 111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 111.png; sourceTree = "<group>"; };
 		46EE685F1AC2ADAA008FB8A4 /* DoBaseAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoBaseAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE68631AC2ADAA008FB8A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46EE68641AC2ADAA008FB8A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -38,6 +49,11 @@
 		46EE68781AC2ADAA008FB8A4 /* DoBaseAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoBaseAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE687D1AC2ADAA008FB8A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46EE687E1AC2ADAA008FB8A4 /* DoBaseAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoBaseAnimationTests.m; sourceTree = "<group>"; };
+		46EE68881AC3B4C0008FB8A4 /* PointObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointObject.h; sourceTree = "<group>"; };
+		46EE68891AC3B4C0008FB8A4 /* PointObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointObject.m; sourceTree = "<group>"; };
+		46EE688B1AC3D05F008FB8A4 /* BallScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallScrollView.h; sourceTree = "<group>"; };
+		46EE688C1AC3D05F008FB8A4 /* BallScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallScrollView.m; sourceTree = "<group>"; };
+		46EE688E1AC3E69F008FB8A4 /* 11123.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11123.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +61,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				463016881AC4F03200124026 /* CFNetwork.framework in Frameworks */,
+				463016861AC4F02900124026 /* QuartzCore.framework in Frameworks */,
+				463016841AC4F01400124026 /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +80,8 @@
 		46EE68561AC2ADAA008FB8A4 = {
 			isa = PBXGroup;
 			children = (
+				463016871AC4F03200124026 /* CFNetwork.framework */,
+				463016851AC4F02900124026 /* QuartzCore.framework */,
 				46EE68611AC2ADAA008FB8A4 /* DoBaseAnimation */,
 				46EE687B1AC2ADAA008FB8A4 /* DoBaseAnimationTests */,
 				46EE68601AC2ADAA008FB8A4 /* Products */,
@@ -79,6 +100,9 @@
 		46EE68611AC2ADAA008FB8A4 /* DoBaseAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				463016831AC4F01400124026 /* Reveal.framework */,
+				46E579B11AC4161300A31251 /* 111.png */,
+				46EE688E1AC3E69F008FB8A4 /* 11123.png */,
 				46EE68661AC2ADAA008FB8A4 /* AppDelegate.h */,
 				46EE68671AC2ADAA008FB8A4 /* AppDelegate.m */,
 				46EE68691AC2ADAA008FB8A4 /* ViewController.h */,
@@ -86,6 +110,10 @@
 				46EE686C1AC2ADAA008FB8A4 /* Main.storyboard */,
 				46EE686F1AC2ADAA008FB8A4 /* Images.xcassets */,
 				46EE68621AC2ADAA008FB8A4 /* Supporting Files */,
+				46EE68881AC3B4C0008FB8A4 /* PointObject.h */,
+				46EE68891AC3B4C0008FB8A4 /* PointObject.m */,
+				46EE688B1AC3D05F008FB8A4 /* BallScrollView.h */,
+				46EE688C1AC3D05F008FB8A4 /* BallScrollView.m */,
 			);
 			path = DoBaseAnimation;
 			sourceTree = "<group>";
@@ -196,8 +224,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46EE688F1AC3E69F008FB8A4 /* 11123.png in Resources */,
 				46EE686E1AC2ADAA008FB8A4 /* Main.storyboard in Resources */,
 				46EE68701AC2ADAA008FB8A4 /* Images.xcassets in Resources */,
+				46E579B21AC4161300A31251 /* 111.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46EE686B1AC2ADAA008FB8A4 /* ViewController.m in Sources */,
+				46EE688D1AC3D05F008FB8A4 /* BallScrollView.m in Sources */,
+				46EE688A1AC3B4C0008FB8A4 /* PointObject.m in Sources */,
 				46EE68681AC2ADAA008FB8A4 /* AppDelegate.m in Sources */,
 				46EE68651AC2ADAA008FB8A4 /* main.m in Sources */,
 			);
@@ -331,8 +363,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DoBaseAnimation",
+				);
 				INFOPLIST_FILE = DoBaseAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -341,8 +379,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DoBaseAnimation",
+				);
 				INFOPLIST_FILE = DoBaseAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -400,6 +443,7 @@
 				46EE68841AC2ADAA008FB8A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46EE68851AC2ADAA008FB8A4 /* Build configuration list for PBXNativeTarget "DoBaseAnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +452,7 @@
 				46EE68871AC2ADAA008FB8A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
