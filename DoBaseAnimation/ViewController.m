@@ -28,11 +28,11 @@
     
     [self.scrollView beginAppear];
     
-    //[self.scrollView makeCustomerAnimition];
+   // [self.scrollView makeCustomerAnimition];
     
- //   [self.scrollView drawBezierPoints:self.scrollView.pointArray];
+   // [self.scrollView drawBezierPoints:self.scrollView.pointArray];
     
-      //  [self.scrollView beginAppear];
+    //[self.scrollView beginAppear];
     
    // [self.greenView.layer addAnimation:[self opacityForever_Animation:0.2] forKey:nil];
     

@@ -29,11 +29,22 @@
     if(!_pointArray)
     {
         _pointArray = [[NSMutableArray alloc] init];
-        [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height]];
-        [_pointArray addObject:[PointObject createPointWithX:0.25*self.frame.size.width andY:self.frame.size.height*0.6]];
-        [_pointArray addObject:[PointObject createPointWithX:0.5*self.frame.size.width andY:self.frame.size.height*0.3]];
-        [_pointArray addObject:[PointObject createPointWithX:0.75*self.frame.size.width  andY:self.frame.size.height*0.4]];
-        [_pointArray addObject:[PointObject createPointWithX:self.frame.size.width andY:self.frame.size.height ]];
+//        [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height]];
+//        [_pointArray addObject:[PointObject createPointWithX:0.25*self.frame.size.width andY:self.frame.size.height*0.6]];
+//        [_pointArray addObject:[PointObject createPointWithX:0.5*self.frame.size.width andY:self.frame.size.height*0.3]];
+//        [_pointArray addObject:[PointObject createPointWithX:0.75*self.frame.size.width  andY:self.frame.size.height*0.4]];
+//        [_pointArray addObject:[PointObject createPointWithX:self.frame.size.width andY:self.frame.size.height ]];
+        
+        [_pointArray addObject:[PointObject createPointWithX:10 andY:10]];
+        [_pointArray addObject:[PointObject createPointWithX:100 andY:70]];
+        [_pointArray addObject:[PointObject createPointWithX:150 andY:40]];
+
+        
+        
+//        self.fristPoint = CGPointMake(10,10);
+//        
+//        self.currentPoint1 = CGPointMake(100,70);
+//        self.currentPoint2 = CGPointMake(150,40);
         
         
         
@@ -166,7 +177,7 @@
     animation.duration= 2.0f;
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
-    //animation.repeatCount=HUGE_VALF;// repeat forever
+    animation.repeatCount=HUGE_VALF;// repeat forever
    // animation.calculationMode = kCAAnimationCubicPaced;
     
     CGMutablePathRef curvedPath = CGPathCreateMutable();
@@ -490,46 +501,52 @@
 //}
 
 
-//- (void)drawRect:(CGRect)rect
-//{
-//    //    UIBezierPath *aPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
-//    //    
-//    //    // Get the CGPathRef and create a mutable version.
-//    //    CGPathRef cgPath = aPath.CGPath;
-//    //    CGMutablePathRef  mutablePath = CGPathCreateMutableCopy(cgPath);
-//    //    
-//    //    // Modify the path and assign it back to the UIBezierPath object.
-//    //    CGPathAddEllipseInRect(mutablePath, NULL, CGRectMake(50, 50, 200, 200));
-//    //    aPath.CGPath = mutablePath;
-//    //    
-//    //    // Release both the mutable copy of the path.
-//    //    CGPathRelease(mutablePath);
-//
-//      //  [self drawCircle];
-//        
-//    //    CGContextRef ctx = UIGraphicsGetCurrentContext();
-//    //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
-//    //    
-//    //    CGContextSetLineWidth(ctx, 3);
-//    //    
-//    //    CGContextSetRGBStrokeColor(ctx, 228/255.0f, 232/255.0f, 235/255.0f, 1);
-//    //    
-//    //    CGContextStrokePath(ctx);
-//    //    [super drawRect:rect];
-//    //    if(self.currStep == 1)
-//    //    {
-//    //        [self drawBezier];
-//    //    }
-//        
-//       // [self caculateMyBezier];
-//        
-//        
-//    //    [self caculateMyBezier:self.percent];
-//        [super drawRect:rect];
-//        [self caculateMyBezier2];
-//    //    [self caculateMyBezier3];
-//
-//}
+- (void)drawRect:(CGRect)rect
+{
+    //    UIBezierPath *aPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
+    //    
+    //    // Get the CGPathRef and create a mutable version.
+    //    CGPathRef cgPath = aPath.CGPath;
+    //    CGMutablePathRef  mutablePath = CGPathCreateMutableCopy(cgPath);
+    //    
+    //    // Modify the path and assign it back to the UIBezierPath object.
+    //    CGPathAddEllipseInRect(mutablePath, NULL, CGRectMake(50, 50, 200, 200));
+    //    aPath.CGPath = mutablePath;
+    //    
+    //    // Release both the mutable copy of the path.
+    //    CGPathRelease(mutablePath);
+
+      //  [self drawCircle];
+        
+    //    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+    //    
+    //    CGContextSetLineWidth(ctx, 3);
+    //    
+    //    CGContextSetRGBStrokeColor(ctx, 228/255.0f, 232/255.0f, 235/255.0f, 1);
+    //    
+    //    CGContextStrokePath(ctx);
+    //    [super drawRect:rect];
+    //    if(self.currStep == 1)
+    //    {
+    //        [self drawBezier];
+    //    }
+        
+       // [self caculateMyBezier];
+        
+        
+    //    [self caculateMyBezier:self.percent];
+        [super drawRect:rect];
+        [self caculateMyBezier2];
+    
+    
+        if(!_finished)
+        {
+            [self drawMyBezierPoints:self.drawIngArray];
+        }
+    //    [self caculateMyBezier3];
+
+}
 
 //- (void)drawRect:(CGRect)rect
 //{
@@ -767,7 +784,7 @@
             
             linePt.x = (1-ti)*(1-ti)*beginPt.x + 2*ti*(1-ti)*controlPt.x+ ti*ti*endPointPt.x;
             
-            linePt.y = 300 -(1-ti)*(1-ti)*self.fristPoint.y + 2*ti*(1-ti)*controlPt.y + ti*ti*endPointPt.y;
+            linePt.y = (1-ti)*(1-ti)*beginPt.y + 2*ti*(1-ti)*controlPt.y + ti*ti*endPointPt.y;
             
             NSLog(@"x:%f y:%f",linePt.x ,linePt.y);
             [linePtArray addObject:linePt];
@@ -779,7 +796,10 @@
 
 -(void)drawMyBezierPoints:(NSMutableArray *)pointArray
 {
-    
+    if(pointArray.count < 1)
+    {
+        return ;
+    }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
@@ -791,13 +811,15 @@
     
     CGContextSetRGBStrokeColor(context, 0/255.0f, 0/255.0f, 0/255.0f, 1);
     
-    CGContextMoveToPoint(context, self.fristPoint.x, self.fristPoint.y);
+    PointObject *originPt = [self.pointArray objectAtIndex:0];
+    
+    CGContextMoveToPoint(context, originPt.x, originPt.y);
     
     NSLog(@"self.percent:%f",self.percent);
     
     if(pointArray.count >= 1)
     {
-    for (PointObject *point in  pointArray) {
+      for (PointObject *point in  pointArray) {
 
         
         CGContextAddLineToPoint(context, point.x, point.y);
