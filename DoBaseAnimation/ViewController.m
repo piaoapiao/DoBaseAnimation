@@ -24,9 +24,13 @@
 //    [self doAnimation2];
     
 //    [self.scrollView appearBall];
+  
     
+    [self.scrollView beginAppear];
     
-    [self.scrollView makeCustomerAnimition];
+    //[self.scrollView makeCustomerAnimition];
+    
+ //   [self.scrollView drawBezierPoints:self.scrollView.pointArray];
     
       //  [self.scrollView beginAppear];
     

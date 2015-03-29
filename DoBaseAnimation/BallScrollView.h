@@ -52,9 +52,23 @@ typedef enum {
 
 @property (nonatomic,assign) CGPoint currentPoint2;
 
+@property (nonatomic,assign) CGPoint lastPoint;
+
 @property (nonatomic,assign) float percent;
 
+@property (nonatomic,assign) BOOL finished;
+
+@property (nonatomic,assign) int  frameNum;
+
+@property (nonatomic,strong) NSMutableArray* allFrameArray;
+
+@property (nonatomic,strong) NSMutableArray* drawIngArray;
+
+@property (nonatomic,strong) NSTimer *timer;
+
 -(void)makeCustomerAnimition;
+
+-(void)drawBezierPoints:(NSMutableArray *)pointArray;
 
 -(void)scrollBall;
 -(void)appearBall;

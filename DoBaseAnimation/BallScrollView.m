@@ -30,9 +30,9 @@
     {
         _pointArray = [[NSMutableArray alloc] init];
         [_pointArray addObject:[PointObject createPointWithX:0 andY:self.frame.size.height]];
-        [_pointArray addObject:[PointObject createPointWithX:0.25*self.frame.size.width andY:self.frame.size.height*0.3 -self.ballView.frame.size.height/2.0]];
-        [_pointArray addObject:[PointObject createPointWithX:0.5*self.frame.size.width andY:self.frame.size.height*0.8 -self.ballView.frame.size.height/2.0]];
-        [_pointArray addObject:[PointObject createPointWithX:0.75*self.frame.size.width  andY:self.frame.size.height*0.6 -self.ballView.frame.size.height/2.0]];
+        [_pointArray addObject:[PointObject createPointWithX:0.25*self.frame.size.width andY:self.frame.size.height*0.6]];
+        [_pointArray addObject:[PointObject createPointWithX:0.5*self.frame.size.width andY:self.frame.size.height*0.3]];
+        [_pointArray addObject:[PointObject createPointWithX:0.75*self.frame.size.width  andY:self.frame.size.height*0.4]];
         [_pointArray addObject:[PointObject createPointWithX:self.frame.size.width andY:self.frame.size.height ]];
         
         
@@ -184,7 +184,7 @@
     
 
     
-    for(int i = 1;i < ptArray.count;i= i+ 2)
+    for(int i = 1;i < ptArray.count -2;i= i+ 2)
     {
         PointObject *point1 = [ptArray objectAtIndex:i];
         PointObject *point2 = [ptArray objectAtIndex:i+1];
@@ -347,9 +347,6 @@
     //
     //    //2.添加动画到layer
     //    [self.ballView.layer addAnimation:anima forKey:nil];
-    
-    
-    
 }
 
 
@@ -493,58 +490,77 @@
 //}
 
 
-- (void)drawRect:(CGRect)rect
-{
-//    UIBezierPath *aPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
-//    
-//    // Get the CGPathRef and create a mutable version.
-//    CGPathRef cgPath = aPath.CGPath;
-//    CGMutablePathRef  mutablePath = CGPathCreateMutableCopy(cgPath);
-//    
-//    // Modify the path and assign it back to the UIBezierPath object.
-//    CGPathAddEllipseInRect(mutablePath, NULL, CGRectMake(50, 50, 200, 200));
-//    aPath.CGPath = mutablePath;
-//    
-//    // Release both the mutable copy of the path.
-//    CGPathRelease(mutablePath);
+//- (void)drawRect:(CGRect)rect
+//{
+//    //    UIBezierPath *aPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
+//    //    
+//    //    // Get the CGPathRef and create a mutable version.
+//    //    CGPathRef cgPath = aPath.CGPath;
+//    //    CGMutablePathRef  mutablePath = CGPathCreateMutableCopy(cgPath);
+//    //    
+//    //    // Modify the path and assign it back to the UIBezierPath object.
+//    //    CGPathAddEllipseInRect(mutablePath, NULL, CGRectMake(50, 50, 200, 200));
+//    //    aPath.CGPath = mutablePath;
+//    //    
+//    //    // Release both the mutable copy of the path.
+//    //    CGPathRelease(mutablePath);
+//
+//      //  [self drawCircle];
+//        
+//    //    CGContextRef ctx = UIGraphicsGetCurrentContext();
+//    //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+//    //    
+//    //    CGContextSetLineWidth(ctx, 3);
+//    //    
+//    //    CGContextSetRGBStrokeColor(ctx, 228/255.0f, 232/255.0f, 235/255.0f, 1);
+//    //    
+//    //    CGContextStrokePath(ctx);
+//    //    [super drawRect:rect];
+//    //    if(self.currStep == 1)
+//    //    {
+//    //        [self drawBezier];
+//    //    }
+//        
+//       // [self caculateMyBezier];
+//        
+//        
+//    //    [self caculateMyBezier:self.percent];
+//        [super drawRect:rect];
+//        [self caculateMyBezier2];
+//    //    [self caculateMyBezier3];
+//
+//}
 
-  //  [self drawCircle];
-    
-//    CGContextRef ctx = UIGraphicsGetCurrentContext();
-//    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
-//    
-//    CGContextSetLineWidth(ctx, 3);
-//    
-//    CGContextSetRGBStrokeColor(ctx, 228/255.0f, 232/255.0f, 235/255.0f, 1);
-//    
-//    CGContextStrokePath(ctx);
+//- (void)drawRect:(CGRect)rect
+//{
 //    [super drawRect:rect];
-//    if(self.currStep == 1)
+//    
+//    if(!_finished)
 //    {
-//        [self drawBezier];
+//        [self drawMyBezierPoints:self.drawIngArray];
 //    }
-    
-   // [self caculateMyBezier];
-    
-    
-//    [self caculateMyBezier:self.percent];
-    [super drawRect:rect];
-    [self caculateMyBezier];
-
-}
+//    
+//}
 
 -(void)makeCustomerAnimition
 {
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshImage) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshImage) userInfo:nil repeats:YES];
 }
 
 -(void)refreshImage
 {
-        self.percent = self.percent + 0.02;
+    self.percent = self.percent + 0.02;
+    if(self.percent >= 1.0)
+    {
+        [self.timer invalidate];
+        return;
+    }
+    
+    
     [self setNeedsDisplay];
 }
 
--(void)caculateMyBezier
+-(void)caculateMyBezier2
 {
 
     self.fristPoint = CGPointMake(10,10);
@@ -564,7 +580,9 @@
     
     CGContextMoveToPoint(context, self.fristPoint.x, self.fristPoint.y);
     
-    for (float ti= 0.0; ti<self.percent; ti+=0.05) {
+    NSLog(@"self.percent:%f",self.percent);
+    
+    for (float ti= 0.0; ti<self.percent; ti+=0.001) {
         CGPoint quxianPoint;
         
 //        quxianPoint.x = (1-ti)*(1-ti)*(1-ti)*self.fristPoint.x + 3*ti*(1-ti)*(1-ti)*self.currentPoint1.x + 3*ti*ti*(1-ti)*self.currentPoint2.x + ti*ti*ti*self.fristPoint.x;//三阶贝塞尔曲线计算方法
@@ -579,8 +597,53 @@
         self.ballView.center = quxianPoint;
     }
     
+    
     CGContextStrokePath(context);
 }
+
+
+-(void)caculateMyBezier3
+{
+    
+    self.fristPoint = CGPointMake(10,10);
+    
+    self.currentPoint1 = CGPointMake(100,70);
+    self.currentPoint2 = CGPointMake(200,40);
+    
+    self.lastPoint = CGPointMake(300,150);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+    
+    CGContextSetLineWidth(context, 3);
+    
+    CGFloat lengths[] = {5,5};
+    CGContextSetLineDash(context, 0, lengths,2);
+    
+    CGContextSetRGBStrokeColor(context, 0/255.0f, 0/255.0f, 0/255.0f, 1);
+    
+    CGContextMoveToPoint(context, self.fristPoint.x, self.fristPoint.y);
+    
+    NSLog(@"self.percent:%f",self.percent);
+    
+    for (float ti= 0.0; ti<self.percent; ti+=0.05) {
+        CGPoint quxianPoint;
+        
+        quxianPoint.x = (1-ti)*(1-ti)*(1-ti)*self.fristPoint.x + 3*ti*(1-ti)*(1-ti)*self.currentPoint1.x + 3*ti*ti*(1-ti)*self.currentPoint2.x + ti*ti*ti*self.lastPoint.x;//三阶贝塞尔曲线计算方法
+        quxianPoint.y = (1-ti)*(1-ti)*(1-ti)*self.fristPoint.y + 3*ti*(1-ti)*(1-ti)*self.currentPoint1.y + 3*ti*ti*(1-ti)*self.currentPoint2.y + ti*ti*ti*self.lastPoint.y;
+        
+//        quxianPoint.x = (1-ti)*(1-ti)*self.fristPoint.x + 2*ti*(1-ti)*self.currentPoint1.x+ ti*ti*self.currentPoint2.x;
+//        
+//        quxianPoint.y = (1-ti)*(1-ti)*self.fristPoint.y + 2*ti*(1-ti)*self.currentPoint1.y + ti*ti*self.currentPoint2.y;
+        
+        CGContextAddLineToPoint(context, quxianPoint.x, quxianPoint.y);
+        
+        self.ballView.center = quxianPoint;
+    }
+    
+    CGContextStrokePath(context);
+}
+
 
 
 - (void)drawBezier{
@@ -644,6 +707,134 @@
 }
 
 
+//-(NSMutableArray *)caculateBezerLinePoint:(NSMutableArray *)array
+//{
+////    for()
+//    //return ;
+//    
+//}
+
+
+
+
+
+-(NSMutableArray *)caculate3PointBezerLine:(NSMutableArray *)threePointArray
+{
+    NSMutableArray *temp  = [NSMutableArray array];
+    
+    PointObject *beginPt = [temp objectAtIndex:0];
+    
+    PointObject *controlPt = [temp objectAtIndex:1];
+    
+    PointObject *endPointPt = [temp objectAtIndex:2];
+    
+
+    
+    for (float ti= 0.0; ti < 1; ti+=0.05)
+    {
+        PointObject *linePt = [[PointObject alloc] init];
+    
+        linePt.x = (1-ti)*(1-ti)*beginPt.x + 2*ti*(1-ti)*controlPt.x+ ti*ti*endPointPt.x;
+    
+        linePt.y = (1-ti)*(1-ti)*self.fristPoint.y + 2*ti*(1-ti)*controlPt.y + ti*ti*endPointPt.y;
+        [temp addObject:linePt];
+    }
+    return temp;
+}
+
+
+-(NSMutableArray *)caculateAllPointBezerLine:(NSMutableArray *)pointArray
+{
+    if(pointArray.count <3 || (pointArray.count%2 ==0))
+    {
+        return nil;
+    }
+    
+    
+    NSMutableArray *linePtArray = [NSMutableArray array];
+    
+    for(int  i = 0;i < pointArray.count -2;i = i + 2)
+    {
+        PointObject *beginPt = [pointArray objectAtIndex:i];
+        
+        PointObject *controlPt = [pointArray objectAtIndex:i+1];
+        
+        PointObject *endPointPt = [pointArray objectAtIndex:i+2];
+        
+        for (float ti= 0.0; ti < 1; ti+=0.05)
+        {
+            PointObject *linePt = [[PointObject alloc] init];
+            
+            linePt.x = (1-ti)*(1-ti)*beginPt.x + 2*ti*(1-ti)*controlPt.x+ ti*ti*endPointPt.x;
+            
+            linePt.y = 300 -(1-ti)*(1-ti)*self.fristPoint.y + 2*ti*(1-ti)*controlPt.y + ti*ti*endPointPt.y;
+            
+            NSLog(@"x:%f y:%f",linePt.x ,linePt.y);
+            [linePtArray addObject:linePt];
+        }
+    }
+    return linePtArray;
+}
+
+
+-(void)drawMyBezierPoints:(NSMutableArray *)pointArray
+{
+    
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+    
+    CGContextSetLineWidth(context, 3);
+    
+    CGFloat lengths[] = {5,5};
+    CGContextSetLineDash(context, 0, lengths,2);
+    
+    CGContextSetRGBStrokeColor(context, 0/255.0f, 0/255.0f, 0/255.0f, 1);
+    
+    CGContextMoveToPoint(context, self.fristPoint.x, self.fristPoint.y);
+    
+    NSLog(@"self.percent:%f",self.percent);
+    
+    if(pointArray.count >= 1)
+    {
+    for (PointObject *point in  pointArray) {
+
+        
+        CGContextAddLineToPoint(context, point.x, point.y);
+    
+    }
+    }
+    
+    
+    CGContextStrokePath(context);
+}
+
+
+-(void)drawBezierPoints:(NSMutableArray *)pointArray
+{
+    self.finished = NO;
+    self.allFrameArray = [self caculateAllPointBezerLine:pointArray];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(drawOneFrameBezier) userInfo:nil repeats:YES];
+    
+}
+
+
+-(void)drawOneFrameBezier
+{
+    if(_frameNum == self.allFrameArray.count)
+    {
+        _frameNum = 0;
+        self.finished = YES;
+        [self.timer invalidate];
+        
+        return;
+    }
+    self.drawIngArray =  [self.allFrameArray subarrayWithRange:NSMakeRange(0, _frameNum)];
+    [self setNeedsDisplay];
+    _frameNum++;
+
+}
 
 
 @end
