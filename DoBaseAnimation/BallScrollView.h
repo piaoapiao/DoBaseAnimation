@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "PointObject.h"
+
 
 typedef enum {
     BegainAppear,
@@ -40,6 +43,18 @@ typedef enum {
 @property (nonatomic,assign) id<stopPositionDelegate> delegate;
 
 @property (nonatomic,assign) BallPosition position;
+
+@property (nonatomic,assign) CGMutablePathRef moveCurvedPath;
+
+@property (nonatomic,assign) CGPoint fristPoint;
+
+@property (nonatomic,assign) CGPoint currentPoint1;
+
+@property (nonatomic,assign) CGPoint currentPoint2;
+
+@property (nonatomic,assign) float percent;
+
+-(void)makeCustomerAnimition;
 
 -(void)scrollBall;
 -(void)appearBall;

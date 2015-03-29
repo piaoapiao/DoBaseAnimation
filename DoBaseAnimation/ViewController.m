@@ -25,7 +25,10 @@
     
 //    [self.scrollView appearBall];
     
-        [self.scrollView beginAppear];
+    
+    [self.scrollView makeCustomerAnimition];
+    
+      //  [self.scrollView beginAppear];
     
    // [self.greenView.layer addAnimation:[self opacityForever_Animation:0.2] forKey:nil];
     

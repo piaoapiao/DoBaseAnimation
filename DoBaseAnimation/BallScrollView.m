@@ -8,6 +8,7 @@
 
 #import "BallScrollView.h"
 
+
 //界面的宽
 #define kFBaseWidth [[UIScreen mainScreen]bounds].size.width
 //界面的高
@@ -88,7 +89,9 @@
         
         UIButton *ballBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [ballBtn addTarget:self action:@selector(clickBall:) forControlEvents:UIControlEventTouchUpInside];
-        [ballBtn setImage:[UIImage imageNamed:@"111"]forState:UIControlStateNormal];
+        ballBtn.layer.cornerRadius = 15;
+       // [ballBtn setImage:[UIImage imageNamed:@"111"]forState:UIControlStateNormal];
+        ballBtn.backgroundColor = [UIColor blackColor];
         [_ballView addSubview:ballBtn];
         
         UIButton *rollBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -155,6 +158,8 @@
 
 -(void)scrollPoints:(NSArray *)ptArray
 {
+    
+   // return;
     self.scrollArray = ptArray;
     
     CAKeyframeAnimation *animation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
@@ -195,7 +200,11 @@
 //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 290, self.frame.size.height - 65, 320, self.frame.size.height - 100);
     //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 712, 184, 512, 184);
     
+    
+    
+    
     animation.path=curvedPath;
+   // animation.calculationMode= @"cubicPaced"; //iscrete', `linear',`paced', `cubic' and `cubicPaced'
     animation.fillMode = kCAFillModeForwards;
     
     //[self.ballView.layer addAnimation:animation forKey:nil];
@@ -280,8 +289,9 @@
     
     //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 290, self.frame.size.height - 65, 320, self.frame.size.height - 100);
     //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 712, 184, 512, 184);
-    
+    self.moveCurvedPath = curvedPath;
     animation.path=curvedPath;
+
     animation.fillMode = kCAFillModeForwards;
     
     //[self.ballView.layer addAnimation:animation forKey:nil];
@@ -400,6 +410,7 @@
             [_delegate ballPosition:RIGHT];
         }
     }
+    [self setNeedsDisplay];
 
 }
 
@@ -442,5 +453,197 @@
     //[self.ballView.layer addAnimation:animation forKey:@"scale-layer"];
     return animation;
 }
+
+//-(void)drawRect:(CGRect)rect
+//{
+////    [super drawRect:rect];
+//    
+//    NSLog(@"drawRect:%@",NSStringFromCGRect(rect));
+//    
+////    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+////
+////    CGContextAddPath(currentContext, self.moveCurvedPath);
+////    [[UIColor purpleColor] setFill];
+////    CGContextDrawPath(currentContext, kCGPathFill);
+//    
+////    [[UIColor brownColor] set];
+////    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+////    CGContextSetLineWidth(currentContext, 5.0f);
+////    CGContextMoveToPoint(currentContext, 50.0f, 10.0f);
+////    CGContextAddLineToPoint(currentContext, 100.0f, 200.0f);
+////    CGContextStrokePath(currentContext);
+//    
+////    CGContextDrawPath(currentContext, [self makePath:self.pointArray]);
+//    
+////     CGContextRef ctx = UIGraphicsGetCurrentContext(); // 获取绘图的CGContextRef
+////    CGContextBeginPath(ctx); // 开始添加路径
+////  //  CGContextAddLines(ctx , 5 , 50 , 100 , 30 ,80); // 添加5瓣花朵的路径
+////    CGContextSetRGBFillColor(ctx,1, 0, 0, 1); // 设置填充颜色
+////    CGContextFillPath(ctx);
+////  //  CGContextAddFlower(ctx , 6 , 160 , 100 , 30, 80); // 添加6瓣花朵的路径
+////    CGContextSetRGBFillColor(ctx,1, 1, 0, 1); // 设置填充颜色
+////    CGContextFillPath(ctx);
+////   // CGContextAddFlower(ctx , 7 , 270 , 100 , 30, 80); // 添加7瓣花朵的路径
+////    CGContextSetRGBFillColor(ctx,1, 0, 1, 1); // 设置填充颜色
+////    CGContextFillPath(ctx);
+////    CGContextClosePath(ctx); // 关闭路径
+//
+//
+//    
+//}
+
+
+- (void)drawRect:(CGRect)rect
+{
+//    UIBezierPath *aPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
+//    
+//    // Get the CGPathRef and create a mutable version.
+//    CGPathRef cgPath = aPath.CGPath;
+//    CGMutablePathRef  mutablePath = CGPathCreateMutableCopy(cgPath);
+//    
+//    // Modify the path and assign it back to the UIBezierPath object.
+//    CGPathAddEllipseInRect(mutablePath, NULL, CGRectMake(50, 50, 200, 200));
+//    aPath.CGPath = mutablePath;
+//    
+//    // Release both the mutable copy of the path.
+//    CGPathRelease(mutablePath);
+
+  //  [self drawCircle];
+    
+//    CGContextRef ctx = UIGraphicsGetCurrentContext();
+//    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+//    
+//    CGContextSetLineWidth(ctx, 3);
+//    
+//    CGContextSetRGBStrokeColor(ctx, 228/255.0f, 232/255.0f, 235/255.0f, 1);
+//    
+//    CGContextStrokePath(ctx);
+//    [super drawRect:rect];
+//    if(self.currStep == 1)
+//    {
+//        [self drawBezier];
+//    }
+    
+   // [self caculateMyBezier];
+    
+    
+//    [self caculateMyBezier:self.percent];
+    [super drawRect:rect];
+    [self caculateMyBezier];
+
+}
+
+-(void)makeCustomerAnimition
+{
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshImage) userInfo:nil repeats:YES];
+}
+
+-(void)refreshImage
+{
+        self.percent = self.percent + 0.02;
+    [self setNeedsDisplay];
+}
+
+-(void)caculateMyBezier
+{
+
+    self.fristPoint = CGPointMake(10,10);
+    
+        self.currentPoint1 = CGPointMake(100,70);
+    self.currentPoint2 = CGPointMake(150,40);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+    
+    CGContextSetLineWidth(context, 3);
+    
+    CGFloat lengths[] = {5,5};
+    CGContextSetLineDash(context, 0, lengths,2);
+    
+    CGContextSetRGBStrokeColor(context, 0/255.0f, 0/255.0f, 0/255.0f, 1);
+    
+    CGContextMoveToPoint(context, self.fristPoint.x, self.fristPoint.y);
+    
+    for (float ti= 0.0; ti<self.percent; ti+=0.05) {
+        CGPoint quxianPoint;
+        
+//        quxianPoint.x = (1-ti)*(1-ti)*(1-ti)*self.fristPoint.x + 3*ti*(1-ti)*(1-ti)*self.currentPoint1.x + 3*ti*ti*(1-ti)*self.currentPoint2.x + ti*ti*ti*self.fristPoint.x;//三阶贝塞尔曲线计算方法
+//        quxianPoint.y = (1-ti)*(1-ti)*(1-ti)*self.fristPoint.y + 3*ti*(1-ti)*(1-ti)*self.currentPoint1.y + 3*ti*ti*(1-ti)*self.currentPoint2.y + ti*ti*ti*self.lastPoint.y;
+        
+        quxianPoint.x = (1-ti)*(1-ti)*self.fristPoint.x + 2*ti*(1-ti)*self.currentPoint1.x+ ti*ti*self.currentPoint2.x;
+        
+        quxianPoint.y = (1-ti)*(1-ti)*self.fristPoint.y + 2*ti*(1-ti)*self.currentPoint1.y + ti*ti*self.currentPoint2.y;
+        
+        CGContextAddLineToPoint(context, quxianPoint.x, quxianPoint.y);
+        
+        self.ballView.center = quxianPoint;
+    }
+    
+    CGContextStrokePath(context);
+}
+
+
+- (void)drawBezier{
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+//    CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, self.frame.size.width - 4 , self.frame.size.height - 4));
+    
+    CGContextSetLineWidth(ctx, 3);
+    
+    CGFloat lengths[] = {5,5};
+    CGContextSetLineDash(ctx, 0, lengths,2);
+    
+    CGContextSetRGBStrokeColor(ctx, 0/255.0f, 0/255.0f, 0/255.0f, 1);
+    
+    CGContextAddPath(ctx, [self makePath:self.pointArray]);
+    
+    CGContextStrokePath(ctx);
+    
+}
+
+
+-(CGMutablePathRef)makePath:(NSArray *)ptArray
+{
+    
+    // return;
+    self.scrollArray = ptArray;
+    
+    CAKeyframeAnimation *animation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
+    animation.duration= 2.0f;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    //animation.repeatCount=HUGE_VALF;// repeat forever
+    // animation.calculationMode = kCAAnimationCubicPaced;
+    
+    CGMutablePathRef curvedPath = CGPathCreateMutable();
+    
+    PointObject *point = [ptArray objectAtIndex:0];
+    
+    CGPathMoveToPoint(curvedPath, NULL,point.x ,  point.y );
+    
+    　　//增加4个二阶贝塞尔曲线
+    //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 45 , self.frame.size.height - 120, 75, self.frame.size.height - 60);
+    //
+    //
+    //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 105, self.frame.size.height - 80, 135, self.frame.size.height - 10);
+    //    CGPathAddQuadCurveToPoint(curvedPath, NULL, 165, self.frame.size.height - 65, 195, self.frame.size.height - 100);
+    
+    
+    
+    for(int i = 1;i < ptArray.count;i= i+ 2)
+    {
+        PointObject *point1 = [ptArray objectAtIndex:i];
+        PointObject *point2 = [ptArray objectAtIndex:i+1];
+        //        CGPathAddQuadCurveToPoint(curvedPath, NULL, point1.x -self.ballView.frame.size.width/2 , point1.y - self.ballView.frame.size.height/2,  point2.x - self.ballView.frame.size.width/2 , point2.y - self.ballView.frame.size.height/2);
+        
+        
+        
+        CGPathAddQuadCurveToPoint(curvedPath, NULL, point1.x , point1.y ,  point2.x, point2.y);
+    }
+    return curvedPath;
+}
+
+
+
 
 @end
